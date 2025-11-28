@@ -54,28 +54,6 @@
         }
         /* End of Loading Screen */
 
-        /* Admin Button Style - New Addition */
-        #adminButton {
-            position: fixed; 
-            top: 10px; 
-            right: 10px; 
-            z-index: 10000; /* Value to overlay loading screen */
-            display: none; /* Hidden by default */
-            padding: 10px 15px; 
-            background-color: #f04e6c; 
-            color: white; 
-            border: none; 
-            border-radius: 5px; 
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            font-family: 'Vazirmatn', Arial, Helvetica, sans-serif;
-            transition: background-color 0.2s;
-        }
-        #adminButton:hover {
-            background-color: #e03b5b;
-        }
-
         /* Main Screen */
         .main-screen{
             background-color: #f0f0f0; 
@@ -591,10 +569,6 @@
         <div class="spinner-circle"></div> 
     </div>
     
-    <button id="adminButton" onclick="alert('Admin Action Triggered')">
-        Admin Panel 🛡️
-    </button>
-    
     <div class="app-screen main-screen" id="mainScreen">
         <div class="balance" id="shibBalance">0 SHIB</div>
         
@@ -823,33 +797,9 @@ You will earn 5% of the revenue from every referral you bring through ads!
             playSFX(type === 'error' ? 'error' : 'success'); 
         }
 
-        // ------------------------------------------------------------------
-        // NEW: Admin Button Configuration
-        // ------------------------------------------------------------------
-        // ⬅️ يجب استبدال هذه القيمة بمعرّف التليجرام (User ID) الخاص بك كمطوّر
-        const DEVELOPER_USER_ID = 7741750541; 
-
 
         /* ===== Telegram User & Referral Setup (Modified to include audio) ===== */
         Telegram.WebApp.ready();
-        
-        // ------------------------------------------------------------------
-        // NEW: Function to check for Developer ID and display Admin Button
-        // ------------------------------------------------------------------
-        function checkAndDisplayAdminButton() {
-            if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
-                const userId = window.Telegram.WebApp.initDataUnsafe.user.id;
-                const adminButton = document.getElementById('adminButton');
-
-                if (adminButton && userId === DEVELOPER_USER_ID) {
-                    adminButton.style.display = 'block';
-                    console.log("Admin button displayed for developer.");
-                }
-            }
-        }
-
-        // استدعاء الدالة فور تهيئة التطبيق
-        checkAndDisplayAdminButton();
         
         let tgUser = null;
         if(Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.user){
